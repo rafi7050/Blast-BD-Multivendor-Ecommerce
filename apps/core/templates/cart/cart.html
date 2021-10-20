@@ -1,0 +1,317 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Cart | {% endblock %}
+
+{% block content %}
+<style>
+    .button1 {
+
+  /* background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: #f44336; */
+  border: none;
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-align: center;
+    clear: both;
+    border-radius: 9999px;
+    background-color: #f44336;
+    padding: 13px 15px 12px;
+    font-weight: 700;
+    
+    width: 100%;
+}
+</style>
+
+
+<!-- ############################################################################################ -->
+<!-- ############################################################################################ -->
+<!-- ############################################################################################ -->
+<!-- ############################################################################################ -->
+<div class="page-contain shopping-cart">
+
+    <!-- Main content -->
+    <div id="main-content" class="main-content">
+        <div class="container">
+
+    <div class="shopping-cart-container">
+        <div class="row">
+            {% if cart %}
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <h3 class="box-title">Your cart items</h3>
+                <form class="shopping-cart-form" action="#" method="post">
+                    <table class="shop_table cart-form">
+                        <thead>
+                        <tr>
+                            <th class="product-name">Product Name</th>
+                            <th class="product-price">Price</th>
+                            <th class="product-quantity">Quantity</th>
+                            <th class="product-subtotal">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart %}
+                        <tr class="cart_item">
+                            <td class="product-thumbnail" data-title="Product Name">
+                                <a class="prd-thumb" href="#">
+                                    <figure><img width="113" height="113" src="{{ item.product.get_thumbnail }}" alt="shipping cart"></figure>
+                                </a>
+                                <a class="prd-name" href="#">{{ item.product.title }}</a>
+                                <div class="action">
+                                    <!-- <a href="#" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> -->
+                                    <a href="?remove_from_cart={{ item.id }}" class="remove"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                </div>
+                            </td>
+                            <td class="product-price" data-title="Price">
+                                <div class="price price-contain">
+                                    <ins><span class="price-amount"><span class="currencySymbol">£</span>{{ item.total_price }}</span></ins>
+                                    <!-- <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del> -->
+                                </div>
+                            </td>
+                            <td class="product-subtotal" data-title="Total">
+                                <div class="price price-contain">
+                                    <ins><span class="price-amount"><span class="currencySymbol"></span>{{ item.quantity }}</span></ins>
+                                    
+                                </div>
+                                
+                            </td> 
+                            <td class="product-quantity" data-title="Product Name">
+                                <div class="quantity-box type1">
+                                    
+
+                                    <a href="?change_quantity={{ item.id }}&quantity=1" class="btn checkout"><i class="fa fa-plus" aria-hidden="true"></i></a>
+
+                                    <a href="?change_quantity={{ item.id }}&quantity=-1" class="btn checkout"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                                   
+                                    
+                                </div>
+                            </td>
+                            
+                           
+                            <!-- <td class="product-quantity" data-title="Quantity">
+                                <div class="quantity-box type1">
+                                   
+                                    <div class="qty-input">
+                                        
+                                     
+                                        <input  name="" value="{{ item.quantity }}" data-max_value="20" data-min_value="1" data-step="1">
+                                        <a href="?change_quantity={{ item.id }}&quantity=1" class="qty-btn btn-up"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                        <a href="?change_quantity={{ item.id }}&quantity=-1" class="qty-btn btn-down"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                            </td> -->
+                              
+                        </tr>
+                       
+                        <tr class="cart_item wrap-buttons">
+                            <td class="wrap-btn-control" colspan="4">
+                                <a class="btn back-to-shop" href="/">Back to Shop</a>
+                            
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+                </form>
+            </div>
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                <div class="shpcart-subtotal-block">
+                    <div class="subtotal-line">
+                        <b class="stt-name">Subtotal <span class="sub">({{ cart|length}} items)</span></b>
+                        <span class="stt-price">{{ cart.get_total_cost }}</span>
+                    </div>
+                    <div class="subtotal-line">
+                        <b class="stt-name">Shipping</b>
+                        <span class="stt-price">£0.00</span>
+                    </div>
+                    <!-- <div class="tax-fee">
+                        <p class="title">Est. Taxes & Fees</p>
+                        <p class="desc">Based on 56789</p>
+                    </div>
+                    <div class="btn-checkout">
+                        <a href="#" class="btn checkout">Check out</a>
+                    </div>
+                    <div class="biolife-progress-bar">
+                        <table>
+                            <tr>
+                                <td class="first-position">
+                                    <span class="index">$0</span>
+                                </td>
+                                <td class="mid-position">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                                <td class="last-position">
+                                    <span class="index">$99</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p class="pickup-info"><b>Free Pickup</b> is available as soon as today More about shipping and pickup</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact info -->
+   
+            <h3 class="box-title">Contact Information</h3>
+
+            <form method="post" action="." id="payment-form">
+                {% csrf_token %}    
+
+
+                {% if form.non_field_errors %}
+                <div class="notification is-danger">
+                    {{ form.non_field_errors}}
+                </div>
+            {% endif %}
+
+            {% if form.errors %}
+                <div class="notification is-danger">
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li><strong>{{ field.label }}: </strong>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+    
+           
+    
+    
+                <div class="columns">
+                    <div class="column is-6">
+                        <div class="field">
+                            <label>First name</label>
+    
+                            <div class="control">
+                                <input class="input" type="text" name="first_name">
+                            </div>
+                        </div>
+    
+                        <div class="field">
+                            <label>Last name</label>
+    
+                            <div class="control">
+                                <input class="input" type="text" name="last_name">
+                            </div>
+                        </div>
+    
+                        <div class="field">
+                            <label>E-mail</label>
+    
+                            <div class="control">
+                                <input class="input" type="email" name="email">
+                            </div>
+                        </div>
+    
+                        <div class="field">
+                            <label>Phone</label>
+    
+                            <div class="control">
+                                <input class="input" type="text" name="phone">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="column is-6">
+                        <div class="field">
+                            <label>Address</label>
+    
+                            <div class="control">
+                                <input class="input" type="text" name="address">
+                            </div>
+                        </div>
+    
+                        <div class="field">
+                            <label>Zip code</label>
+    
+                            <div class="control">
+                                <input class="input" type="text" name="zipcode">
+                            </div>
+                        </div>
+    
+                        <div class="field">
+                            <label>Place</label>
+    
+                            <div class="control">
+                                <input class="input" type="text" name="place">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+              
+                
+                <div class="field">
+                    <div class="control">
+                        <button class="button1" >Checkout</button>
+                    </div>
+                </div>
+        
+
+    {% else %}
+        <p>You don't have any products in your cart!</p>
+    {% endif %}
+
+</div>
+</div>
+</div>
+<!-- ############################################################################################ -->
+<!-- ############################################################################################ -->
+<!-- ############################################################################################ -->
+<!-- ############################################################################################ -->
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe('{{ stripe_pub_key }}');
+        var elements = stripe.elements();
+
+        var card = elements.create('card');
+
+        card.mount('#card-element');
+
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    stripeTokenHandler(result.token);
+                }
+            });
+        });
+
+        function stripeTokenHandler(token) {
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripe_token');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            form.submit();
+        }
+    </script>
+{% endblock %}

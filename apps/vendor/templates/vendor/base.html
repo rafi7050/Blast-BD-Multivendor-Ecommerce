@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Vendor Admin</title>
+  <!-- plugins:css -->
+ 
+  {% include 'vendor/style.html' %}
+</head>
+<body>
+    <div class="container-scroller">
+  
+
+
+    {% include 'vendor/vendor_nav.html' %}
+
+ 
+    {% block content %}
+
+    {% endblock %}
+    {% include 'vendor/script.html' %}
+
+    </div>
+
+
+
+
+
+
+</body>
+</html>
